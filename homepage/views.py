@@ -17,6 +17,7 @@ def index(request):
             new_text = Text_line.objects.create(
                 Text=data.get('Text')
             )
+        # used for reference:: https://queirozf.com/entries/python-3-subprocess-examples#run-example-store-output-and-error-message-in-string
         if user_text:
             cowsay_process = subprocess.run(
                 ["cowsay", user_text], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
