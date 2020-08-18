@@ -3,4 +3,4 @@ from homepage.models import Text_line
 
 
 class TextForm(forms.Form):
-    user_text = forms.CharField(max_length=240)
+    Text = forms.CharField(max_length=240)
