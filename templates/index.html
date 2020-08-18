@@ -12,7 +12,9 @@
     <br>
     <h4>Cowsay?</h4>
     <br>
-    <pre>{{ cowsay_process }}</pre>
+    {%  if cowsay_process  %}
+        <pre style="background-color:transparent; border:0;">{{ cowsay_process }}</pre>
+    {% endif %}
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}

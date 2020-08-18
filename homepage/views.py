@@ -8,7 +8,7 @@ import subprocess
 
 
 def index(request):
-    user_text = ''
+    user_text = None
     if request.method == "POST":
         form = TextForm(request.POST)
         if form.is_valid():
@@ -17,10 +17,13 @@ def index(request):
             new_text = Text_line.objects.create(
                 Text=data.get('Text')
             )
-    cowsay_process = subprocess.run(
-        ["cowsay", user_text], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if user_text:
+            cowsay_process = subprocess.run(
+                ["cowsay", user_text], universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            form = TextForm()
+            return render(request, "index.html", {"form": form, "cowsay_process": cowsay_process.stdout})
     form = TextForm()
-    return render(request, "index.html", {"form": form, "cowsay_process": cowsay_process.stdout})
+    return render(request, "index.html", {"form": form})
 
 
 def history_view(request):
